@@ -3,4 +3,5 @@ project(theRegulators)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(theRegulators main.cpp)
+include_directories(include)
+add_executable(theRegulators main.cpp src/pomieszczenie.cpp)
