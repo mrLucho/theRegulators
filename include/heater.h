@@ -6,6 +6,10 @@
 #define THEREGULATORS_HEATER_H
 
 #include <iostream>
+#include <exception>
+
+
+
 
 class Heater{
 public:

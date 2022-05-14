@@ -8,9 +8,25 @@
 #include "pomieszczenie.h"
 #include "heater.h"
 
+
+struct InvalidRoomPtr : public std::exception{
+    const char * what () const throw (){
+        return "roomPtr is null or nullptr";
+    }
+};
+struct InvalidHeaterPtr : public std::exception{
+    const char * what () const throw (){
+        return "heaterPtr is null or nullptr";
+    }
+};
+
+
+
+
 class Regulator{
 public:
-    Regulator(float desiredTemp,Pomieszczenie* roomPtr,Heater* heaterPtr)
+//    enable creating without valid pointers
+    Regulator(float desiredTemp,Pomieszczenie* roomPtr= nullptr,Heater* heaterPtr= nullptr)
     : setTemp_(desiredTemp),roomPtr_(roomPtr),heaterPtr_(heaterPtr){}
 
     Regulator() {}
@@ -22,7 +38,6 @@ public:
         roomPtr_=roomPtr;
     }
 
-    virtual float control(float setTemp,float currentTemp,float dt) = 0;
     virtual float otherControl(float dt) = 0;
 
 protected:

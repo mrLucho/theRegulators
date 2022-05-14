@@ -10,6 +10,7 @@
 //
 void Simulation::iteration() {
     float temp = (regulator[0])->otherControl(dt);
+    if (temp < -273.15) throw TooLowTemp();
     tempLog.push_back(temp);
     std::cout<<temp<<std::endl;
 }

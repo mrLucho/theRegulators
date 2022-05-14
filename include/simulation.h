@@ -10,7 +10,11 @@
 
 #include "regulatorBB.h"
 
-
+struct TooLowTemp : public std::exception{
+    const char * what () const throw (){
+        return "temperature exceeded Absolute 0";
+    }
+};
 
 // main class, lots of inputs here to avoid it later
 class Simulation{
