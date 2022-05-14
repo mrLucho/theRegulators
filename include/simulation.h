@@ -8,8 +8,7 @@
 #include <vector>
 #include <string>
 
-#include "heater.h"
-#include "pomieszczenie.h"
+#include "regulatorBB.h"
 
 
 
