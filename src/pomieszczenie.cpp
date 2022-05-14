@@ -16,6 +16,8 @@ Pomieszczenie::Pomieszczenie(float wys_, float szer_, float gleb_)
   masaPowietrza = szerokosc * glebokosc * wysokosc * gestoscPowietrza;
 }
 
+
+//update all included
 void Pomieszczenie::aktualizuj(float dt) {
   /*Oblicza nowa temperature w pomieszczeniu na podstawie wplywajacego ciepla.*/
   cieploWchodzace -= utrataCiepla();
@@ -23,6 +25,7 @@ void Pomieszczenie::aktualizuj(float dt) {
   cieploWchodzace = 0.0;
 }
 
+//add only two methods used
 void Pomieszczenie::dodajCieplo(float q) {
   /*Dodaje pewna ilosc ciepla (w watach) wplywajaca do pomieszczenia.*/
   cieploWchodzace += q;
