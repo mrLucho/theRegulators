@@ -9,9 +9,12 @@
 #include "heater.h"
 
 class Regulator{
-    Regulator() = default;
+public:
     Regulator(float desiredTemp,Pomieszczenie* roomPtr,Heater* heaterPtr)
     : setTemp_(desiredTemp),roomPtr_(roomPtr),heaterPtr_(heaterPtr){}
+
+    Regulator() {}
+
 
     void setParameters(float desiredTemp,Pomieszczenie* roomPtr,Heater* heaterPtr){
         setTemp_ =desiredTemp;

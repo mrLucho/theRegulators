@@ -16,3 +16,11 @@ void Simulation::save2file(std::string filename) {
 void Simulation::run(int iterations, float dt) {
 
 }
+
+void Simulation::setRegulator(bool isBB) {
+    if (isBB){
+        RegulatorBB* regulatorBb = new RegulatorBB();
+        Regulator* ptr = dynamic_cast<Regulator*>(regulatorPtr);
+        this->regulatorPtr = ptr;
+    }
+}

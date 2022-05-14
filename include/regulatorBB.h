@@ -7,9 +7,9 @@
 
 #include "regulator.h"
 
-class RegulatorBB : Regulator{
+class RegulatorBB : public Regulator{
 public:
-
+//    RegulatorBB() = default;
 
     float control(float setTemp, float currentTemp, float dt) override;
     float otherControl(float dt) override;

@@ -1,6 +1,6 @@
 #include <iostream>
-
+#include "simulation.h"
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Simulation sim = Simulation(1,200,1,1,1);
     return 0;
 }

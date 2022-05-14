@@ -17,7 +17,7 @@ class Simulation{
 public:
     Simulation(float dtime,float heaterMaxPower,float height,float width,float deep)
     : dt(dtime), room(height,width,deep),heater(heaterMaxPower){};
-
+    void setRegulator(bool isBB);
 
     void iteration(float dt);
     void save2file(std::string filename);
@@ -29,6 +29,7 @@ private:
 
     Heater heater;
     Pomieszczenie room;
+    Regulator* regulatorPtr;
 
 };
 #endif //THEREGULATORS_SIMULATION_H
