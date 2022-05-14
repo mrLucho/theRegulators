@@ -31,21 +31,18 @@ void Simulation::save2file(std::string filename) {
 }
 
 void Simulation::run(int iterations) {
-    for (int i = 0; i < iterations; ++i) {
+    for (int i = 0; i < iterations; i++) {
         iteration();
     }
 }
 
 void Simulation::setRegulator(bool isBB) {
     if (isBB){
-        RegulatorBB* regPtr = new RegulatorBB();
+        RegulatorBB* regPtr = new RegulatorBB(this->setTemp_, &(this->room),&(this->heater));
         this->regulator.push_back(regPtr);
     }
 }
 Simulation::Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp)
         : dt(dtime), room(height,width,deep),heater(heaterMaxPower),setTemp_(setTemp){
-    if (true){
-        RegulatorBB* regPtr = new RegulatorBB(setTemp, &(this->room),&(this->heater));
-        this->regulator.push_back(regPtr);
-    }
+    setRegulator(true);
 }
