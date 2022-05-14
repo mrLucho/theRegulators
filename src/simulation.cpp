@@ -9,7 +9,15 @@
 
 //
 void Simulation::iteration() {
-    float temp = (regulator[0])->otherControl(dt);
+    float temp;
+    if (regulator.empty() or regulator[0] == nullptr) throw NoRegulatorPresent();
+    try {
+          temp= (regulator[0])->otherControl(dt);
+    }
+    catch (NoRegulatorPresent& noRegulatorPresent) {
+        std::cout<<noRegulatorPresent.what()<<std::endl;
+    }
+
     if (temp < -273.15) throw TooLowTemp();
     tempLog.push_back(temp);
     std::cout<<temp<<std::endl;

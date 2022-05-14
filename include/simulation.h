@@ -16,6 +16,12 @@ struct TooLowTemp : public std::exception{
     }
 };
 
+struct NoRegulatorPresent : public std::exception{
+    const char * what () const throw (){
+        return "roomPtr is null or nullptr";
+    }
+};
+
 // main class, lots of inputs here to avoid it later
 class Simulation{
 public:
