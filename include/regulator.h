@@ -29,8 +29,7 @@ public:
     Regulator(float desiredTemp,Pomieszczenie* roomPtr= nullptr,Heater* heaterPtr= nullptr)
     : setTemp_(desiredTemp),roomPtr_(roomPtr),heaterPtr_(heaterPtr){}
 
-    Regulator() {}
-
+    Regulator() = default;
 
     void setParameters(float desiredTemp,Pomieszczenie* roomPtr,Heater* heaterPtr){
         setTemp_ =desiredTemp;
@@ -38,7 +37,7 @@ public:
         roomPtr_=roomPtr;
     }
 
-    virtual float otherControl(float dt) = 0;
+    virtual float control(float dt) = 0;
 
 protected:
     float setTemp_;

@@ -12,7 +12,7 @@ void Simulation::iteration() {
     float temp;
     if (regulator.empty() or regulator[0] == nullptr) throw NoRegulatorPresent();
     try {
-          temp= (regulator[0])->otherControl(dt);
+          temp= (regulator[0])->control(dt);
     }
     catch (NoRegulatorPresent& noRegulatorPresent) {
         std::cout<<noRegulatorPresent.what()<<std::endl;

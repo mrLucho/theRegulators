@@ -7,8 +7,7 @@
 
 
 // returns controlled temp
-float RegulatorBB::otherControl(float dt) {
-//   todo: trow error for <-273C
+float RegulatorBB::control(float dt) {
     if (roomPtr_ == nullptr or roomPtr_ == NULL) throw InvalidRoomPtr();
     if (heaterPtr_ == nullptr or heaterPtr_ == NULL) throw InvalidHeaterPtr();
 

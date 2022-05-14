@@ -16,7 +16,7 @@ public:
     RegulatorBB() = default;
     RegulatorBB(float desiredTemp,Pomieszczenie* roomPtr,Heater* heaterPtr) : Regulator(desiredTemp, roomPtr,heaterPtr) {}
 
-    float otherControl(float dt) override;
+    float control(float dt) override;
 
 };
 #endif //THEREGULATORS_REGULATORBB_H
