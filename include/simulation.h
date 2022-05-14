@@ -12,19 +12,19 @@
 
 
 
-
+// main class, lots of inputs here to avoid it later
 class Simulation{
 public:
     Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp = 20);
     void setRegulator(bool isBB);
 
-    void iteration(float dt);
+    void iteration();
     void save2file(std::string filename);
-    void run(float dt,int iterations=10);
+    void run(int iterations=10);
 
     Heater heater;
     Pomieszczenie room;
-    ~Simulation(){regulator.clear();}
+    ~Simulation(){delete regulator[0];}
 
 private:
     const float dt; //float to be compatible with pomieszczenie class

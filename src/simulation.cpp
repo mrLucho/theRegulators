@@ -5,19 +5,25 @@
 #include <iostream>
 #include "simulation.h"
 #include <vector>
-//
-void Simulation::iteration(float dt) {
+#include <fstream>
 
-    std::cout<<(regulator[0])->otherControl(dt)<<std::endl;
+//
+void Simulation::iteration() {
+    float temp = (regulator[0])->otherControl(dt);
+    tempLog.push_back(temp);
+    std::cout<<temp<<std::endl;
 }
 
 void Simulation::save2file(std::string filename) {
+    std::ofstream outFile(filename);
+    // the important part
+    for (const auto &e : tempLog) outFile << e << "\n";
 
 }
 
-void Simulation::run( float dt,int iterations) {
+void Simulation::run(int iterations) {
     for (int i = 0; i < iterations; ++i) {
-        iteration(dt);
+        iteration();
     }
 }
 
