@@ -11,7 +11,7 @@ float RegulatorBB::control(float setTemp, float currentTemp, float dt) {
 float RegulatorBB::otherControl(float dt) {
 //   todo: trow error for <-273C
     float currentTemp = roomPtr_->getTemperatura();
-    float heaterPowerLevel =  (currentTemp< setTemp_) ? 1 : 0.0;
+    float heaterPowerLevel =  (currentTemp < setTemp_) ? 1.0 : 0.0;
     float heat = this->heaterPtr_->giveHeat(heaterPowerLevel);
     this->roomPtr_->dodajCieplo(heat);
     roomPtr_->aktualizuj(dt);

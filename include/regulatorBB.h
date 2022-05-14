@@ -9,9 +9,11 @@
 
 class RegulatorBB : public Regulator{
 public:
-//    RegulatorBB() = default;
+    RegulatorBB() = default;
+    RegulatorBB(float desiredTemp,Pomieszczenie* roomPtr,Heater* heaterPtr) : Regulator(desiredTemp, roomPtr,heaterPtr) {}
 
     float control(float setTemp, float currentTemp, float dt) override;
     float otherControl(float dt) override;
+
 };
 #endif //THEREGULATORS_REGULATORBB_H

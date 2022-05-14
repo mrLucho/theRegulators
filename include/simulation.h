@@ -4,7 +4,7 @@
 
 #ifndef THEREGULATORS_SIMULATION_H
 #define THEREGULATORS_SIMULATION_H
-#include <stdio.h>
+#include <cstdio>
 #include <vector>
 #include <string>
 
@@ -15,21 +15,24 @@
 
 class Simulation{
 public:
-    Simulation(float dtime,float heaterMaxPower,float height,float width,float deep)
-    : dt(dtime), room(height,width,deep),heater(heaterMaxPower){};
+    Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp = 20);
     void setRegulator(bool isBB);
 
     void iteration(float dt);
     void save2file(std::string filename);
-    void run(int iterations, float dt);
+    void run(float dt,int iterations=10);
+
+    Heater heater;
+    Pomieszczenie room;
+    ~Simulation(){regulator.clear();}
 
 private:
     const float dt; //float to be compatible with pomieszczenie class
     std::vector<float> tempLog;
 
-    Heater heater;
-    Pomieszczenie room;
-    Regulator* regulatorPtr;
+
+    std::vector<Regulator*>regulator;
+    float setTemp_;
 
 };
 #endif //THEREGULATORS_SIMULATION_H
