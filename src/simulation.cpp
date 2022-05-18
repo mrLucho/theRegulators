@@ -50,7 +50,11 @@ void Simulation::setRegulator(bool isBB) {
         /*
          * todo: ask for params for pid
          */
-        PID* regPtr = new PID(setTemp_, &(this->room),&(this->heater),0.2,0.02,0.02);
+        float kp= safeFloatInputGreaterThan0("kp");
+        float ki= safeFloatInputGreaterThan0("ki");
+        float kd= safeFloatInputGreaterThan0("kd");
+
+        PID* regPtr = new PID(setTemp_, &(this->room),&(this->heater),kp,ki,kd);
         this->regulator.push_back(regPtr);
     }
 }
@@ -60,5 +64,20 @@ Simulation::Simulation(float dtime,float heaterMaxPower,float height,float width
     std::ofstream ofs;
     ofs.open("results.csv", std::ofstream::out | std::ofstream::trunc);
     ofs.close();
+}
+
+
+float Simulation::safeFloatInputGreaterThan0(std::string paramName) {
+    float num;
+    for (;;) {
+        std::cout << "Please enter in "<<paramName<<": ";
+        if (std::cin >> num and num >0) {
+            return num;
+        } else {
+            std::cout << "Please enter a valid "<<paramName <<":"<<std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
 }
 

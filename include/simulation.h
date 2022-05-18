@@ -38,7 +38,7 @@ public:
 private:
     const float dt_; //float to be compatible with pomieszczenie class
     std::vector<float> tempLog;
-
+    static float safeFloatInputGreaterThan0(std::string paramName) ;
 
     std::vector<Regulator*>regulator;
     float setTemp_;

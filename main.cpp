@@ -6,6 +6,7 @@ int main() {
 //    sim.run(100);
 
     float safeFloatInputGreaterThan0(std::string paramName);
+    int safeIntInputGreaterThan0(std::string paramName);
 //
 //
     std::cout<<"Welcome in automatic regulation sim, enter here parameters "<<std::endl;
@@ -51,7 +52,7 @@ int main() {
 
 //    all params set
     Simulation sim = Simulation(dt,maxPower,height,width,deep,setTemp,isBB);
-    sim.run(100);
+    sim.run(safeIntInputGreaterThan0("iterations"));
 
 
 
@@ -61,6 +62,20 @@ int main() {
 
 float safeFloatInputGreaterThan0(std::string paramName) {
     float num;
+    for (;;) {
+        std::cout << "Please enter in "<<paramName<<": ";
+        if (std::cin >> num and num >0) {
+            return num;
+        } else {
+            std::cout << "Please enter a valid "<<paramName <<":"<<std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
+}
+
+int safeIntInputGreaterThan0(std::string paramName) {
+    int num;
     for (;;) {
         std::cout << "Please enter in "<<paramName<<": ";
         if (std::cin >> num and num >0) {
