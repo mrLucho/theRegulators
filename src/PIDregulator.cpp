@@ -1,0 +1,20 @@
+//
+// Created by user on 18.05.2022.
+//
+
+#include "PIDregulator.h"
+
+float PID::control(float dt) {
+    float e = this->setTemp_ - roomPtr_->getTemperatura();
+    integral += e*dt;
+    float deltaE = (e-previousE)/dt;
+    previousE = deltaE;
+
+    float heaterPowerLevel = kp_ * e + ki_*integral + kd_ * deltaE;
+    if (heaterPowerLevel >=1) heaterPowerLevel=1;
+    if (heaterPowerLevel <=0) heaterPowerLevel=0;
+    float heat = this->heaterPtr_->giveHeat(heaterPowerLevel);
+    this->roomPtr_->dodajCieplo(heat);
+    roomPtr_->aktualizuj(dt);
+    return roomPtr_->getTemperatura();
+}

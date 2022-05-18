@@ -41,8 +41,12 @@ void Simulation::setRegulator(bool isBB) {
         RegulatorBB* regPtr = new RegulatorBB(this->setTemp_, &(this->room),&(this->heater));
         this->regulator.push_back(regPtr);
     }
+    else{
+        PID* regPtr = new PID(setTemp_, &(this->room),&(this->heater),0.2,0.002,0);
+        this->regulator.push_back(regPtr);
+    }
 }
-Simulation::Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp)
+Simulation::Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp,bool isBB)
         : dt(dtime), room(height,width,deep),heater(heaterMaxPower),setTemp_(setTemp){
-    setRegulator(true);
+    setRegulator(isBB);
 }

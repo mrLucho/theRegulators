@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <vector>
 #include <string>
+#include "PIDregulator.h"
 
 #include "regulatorBB.h"
 
@@ -25,7 +26,7 @@ struct NoRegulatorPresent : public std::exception{
 // main class, lots of inputs here to avoid it later
 class Simulation{
 public:
-    Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp = 20);
+    Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp = 20,bool isBB = true);
     void setRegulator(bool isBB);
 
     void iteration();
