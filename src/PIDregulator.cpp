@@ -5,10 +5,12 @@
 #include "PIDregulator.h"
 
 float PID::control(float dt) {
+    if (roomPtr_ == nullptr) throw InvalidRoomPtr();
+    if (heaterPtr_ == nullptr) throw InvalidHeaterPtr();
     float e = this->setTemp_ - roomPtr_->getTemperatura();
     integral += e*dt;
     float deltaE = (e-previousE)/dt;
-    previousE = deltaE;
+    previousE = e;
 
     float heaterPowerLevel = kp_ * e + ki_*integral + kd_ * deltaE;
     if (heaterPowerLevel >=1) heaterPowerLevel=1;

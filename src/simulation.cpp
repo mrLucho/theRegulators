@@ -26,7 +26,12 @@ void Simulation::iteration() {
 void Simulation::save2file(std::string filename) {
     std::ofstream outFile(filename);
     // the important part
-    for (const auto &e : tempLog) outFile << e << "\n";
+    float time = 0;
+    for (const auto &e : tempLog) {
+        outFile << e << ","<< time << "\n";
+        time += dt;
+    }
+
 
 }
 
@@ -42,7 +47,10 @@ void Simulation::setRegulator(bool isBB) {
         this->regulator.push_back(regPtr);
     }
     else{
-        PID* regPtr = new PID(setTemp_, &(this->room),&(this->heater),0.2,0.002,0);
+        /*
+         * todo: ask for params for pid
+         */
+        PID* regPtr = new PID(setTemp_, &(this->room),&(this->heater),0.2,0.02,0.02);
         this->regulator.push_back(regPtr);
     }
 }
