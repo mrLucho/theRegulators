@@ -1,7 +1,4 @@
-
 #include "regulatorBB.h"
-
-
 
 // returns controlled temp
 float RegulatorBB::control(float dt) {

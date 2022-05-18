@@ -1,19 +1,15 @@
-//
-// Created by user on 12.05.2022.
-//
-
 #include <iostream>
 #include "simulation.h"
 #include <vector>
 #include <fstream>
 #include <limits>
 
-//
+
 void Simulation::iteration() {
     float temp;
-    if (regulator.empty() or regulator[0] == nullptr) throw NoRegulatorPresent();
+    if (regulator_.empty() or regulator_[0] == nullptr) throw NoRegulatorPresent();
     try {
-          temp= (regulator[0])->control(dt_);
+          temp= (regulator_[0])->control(dt_);
     }
     catch (NoRegulatorPresent& noRegulatorPresent) {
         std::cout<<noRegulatorPresent.what()<<std::endl;
@@ -22,15 +18,16 @@ void Simulation::iteration() {
     if (temp < -273.15) throw TooLowTemp();
     save2file("results.csv");
 
-    tempLog.push_back(temp);
-    currentTime+=dt_;
+//    temp log not used much
+    tempLog_.push_back(temp);
+    currentTime_+=dt_;
     std::cout<<temp<<std::endl;
 }
 
 void Simulation::save2file(const std::string& filename) {
     std::ofstream outFile(filename,std::ios::app);
     // the important part
-    outFile << room.getTemperatura() << ","<< heater.getCurrentPower() << "," << currentTime<<std::endl;
+    outFile << room.getTemperatura() << "," << heater.getCurrentPower() << "," << currentTime_ << std::endl;
 
 
 }
@@ -44,18 +41,15 @@ void Simulation::run(int iterations) {
 void Simulation::setRegulator(bool isBB) {
     if (isBB){
         RegulatorBB* regPtr = new RegulatorBB(this->setTemp_, &(this->room),&(this->heater));
-        this->regulator.push_back(regPtr);
+        this->regulator_.push_back(regPtr);
     }
     else{
-        /*
-         * todo: ask for params for pid
-         */
         float kp= safeFloatInputGreaterThan0("kp");
         float ki= safeFloatInputGreaterThan0("ki");
         float kd= safeFloatInputGreaterThan0("kd");
 
         PID* regPtr = new PID(setTemp_, &(this->room),&(this->heater),kp,ki,kd);
-        this->regulator.push_back(regPtr);
+        this->regulator_.push_back(regPtr);
     }
 }
 Simulation::Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp,bool isBB)

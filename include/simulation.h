@@ -1,11 +1,11 @@
-
 #ifndef THEREGULATORS_SIMULATION_H
 #define THEREGULATORS_SIMULATION_H
+
 #include <cstdio>
 #include <vector>
 #include <string>
-#include "PIDregulator.h"
 
+#include "PIDregulator.h"
 #include "regulatorBB.h"
 
 struct TooLowTemp : public std::exception{
@@ -32,16 +32,16 @@ public:
 
     Heater heater;
     Pomieszczenie room;
-    ~Simulation(){delete regulator[0];}
+    ~Simulation(){delete regulator_[0];}
 
 
 private:
     const float dt_; //float to be compatible with pomieszczenie class
-    std::vector<float> tempLog;
+    std::vector<float> tempLog_;
     static float safeFloatInputGreaterThan0(std::string paramName) ;
 
-    std::vector<Regulator*>regulator;
+    std::vector<Regulator*>regulator_;
     float setTemp_;
-    float currentTime= 0;
+    float currentTime_= 0;
 };
 #endif //THEREGULATORS_SIMULATION_H

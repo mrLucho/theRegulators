@@ -7,8 +7,8 @@ int main() {
 
     float safeFloatInputGreaterThan0(std::string paramName);
     int safeIntInputGreaterThan0(std::string paramName);
-//
-//
+
+
     std::cout<<"Welcome in automatic regulation sim, enter here parameters "<<std::endl;
 
     std::cout<<"Room"<<std::endl;
@@ -38,7 +38,7 @@ int main() {
     bool isBB;
 
     for (;;) {
-        std::cout << "Please enter regulator type BB or PID "<<": ";
+        std::cout << "Please enter regulator_ type BB or PID "<<": ";
         if (std::cin >> regType and (regType == "BB" or regType == "PID") ) {
             if (regType =="BB") { isBB = true; }
             else { isBB = false; }

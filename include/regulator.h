@@ -1,7 +1,3 @@
-//
-// Created by user on 14.05.2022.
-//
-
 #ifndef THEREGULATORS_REGULATOR_H
 #define THEREGULATORS_REGULATOR_H
 
@@ -25,7 +21,7 @@ struct InvalidHeaterPtr : public std::exception{
 
 class Regulator{
 public:
-//    enable creating without valid pointers
+//    enable creating without valid pointers, may be vulnerable
     Regulator(float desiredTemp,Pomieszczenie* roomPtr= nullptr,Heater* heaterPtr= nullptr)
     : setTemp_(desiredTemp),roomPtr_(roomPtr),heaterPtr_(heaterPtr){}
 

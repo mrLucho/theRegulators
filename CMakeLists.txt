@@ -4,4 +4,4 @@ project(theRegulators)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(include)
-add_executable(theRegulators main.cpp src/pomieszczenie.cpp src/simulation.cpp src/heater.cpp src/regulator.cpp src/regulatorBB.cpp src/PIDregulator.cpp)
+add_executable(theRegulators main.cpp src/pomieszczenie.cpp src/simulation.cpp src/regulatorBB.cpp src/PIDregulator.cpp)
