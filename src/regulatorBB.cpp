@@ -1,6 +1,3 @@
-//
-// Created by user on 14.05.2022.
-//
 
 #include "regulatorBB.h"
 
@@ -14,6 +11,7 @@ float RegulatorBB::control(float dt) {
 
     float currentTemp = roomPtr_->getTemperatura();
     float heaterPowerLevel =  (currentTemp < setTemp_) ? 1.0 : 0.0;
+    heaterPtr_->setCurrentLevel(heaterPowerLevel);
     float heat = this->heaterPtr_->giveHeat(heaterPowerLevel);
     this->roomPtr_->dodajCieplo(heat);
     roomPtr_->aktualizuj(dt);

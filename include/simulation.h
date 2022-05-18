@@ -1,6 +1,3 @@
-//
-// Created by user on 12.05.2022.
-//
 
 #ifndef THEREGULATORS_SIMULATION_H
 #define THEREGULATORS_SIMULATION_H
@@ -30,7 +27,7 @@ public:
     void setRegulator(bool isBB);
 
     void iteration();
-    void save2file(std::string filename);
+    void save2file(const std::string& filename);
     void run(int iterations=10);
 
     Heater heater;
@@ -44,6 +41,6 @@ private:
 
     std::vector<Regulator*>regulator;
     float setTemp_;
-
+    float currentTime= 0;
 };
 #endif //THEREGULATORS_SIMULATION_H

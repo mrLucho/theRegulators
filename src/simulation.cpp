@@ -19,18 +19,17 @@ void Simulation::iteration() {
     }
 
     if (temp < -273.15) throw TooLowTemp();
+    save2file("results.csv");
+
     tempLog.push_back(temp);
+    currentTime+=dt;
     std::cout<<temp<<std::endl;
 }
 
-void Simulation::save2file(std::string filename) {
-    std::ofstream outFile(filename);
+void Simulation::save2file(const std::string& filename) {
+    std::ofstream outFile(filename,std::ios::app);
     // the important part
-    float time = 0;
-    for (const auto &e : tempLog) {
-        outFile << e << ","<< time << "\n";
-        time += dt;
-    }
+    outFile << room.getTemperatura() << ","<< heater.getCurrentPower() << "," << currentTime<<std::endl;
 
 
 }
@@ -57,4 +56,7 @@ void Simulation::setRegulator(bool isBB) {
 Simulation::Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp,bool isBB)
         : dt(dtime), room(height,width,deep),heater(heaterMaxPower),setTemp_(setTemp){
     setRegulator(isBB);
+    std::ofstream ofs;
+    ofs.open("results.csv", std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
 }
