@@ -40,7 +40,7 @@ float Pomieszczenie::utrataCiepla() const {
 
 float Pomieszczenie::zmianaTemperatury(float q, float dt) const {
   /*Oblicza zmiane temperatury osrodka na podstawie jego parametrow i wplywajacego ciepla.
-    q = m*c*dt  =>  dtemp = q/(m*c)
+    q = m*c*dt_  =>  dtemp = q/(m*c)
   */
   return q / (masaPowietrza * cieploWlasciwe) * dt;
 }

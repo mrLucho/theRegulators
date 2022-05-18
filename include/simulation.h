@@ -34,8 +34,9 @@ public:
     Pomieszczenie room;
     ~Simulation(){delete regulator[0];}
 
+
 private:
-    const float dt; //float to be compatible with pomieszczenie class
+    const float dt_; //float to be compatible with pomieszczenie class
     std::vector<float> tempLog;
 
 

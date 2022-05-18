@@ -6,13 +6,14 @@
 #include "simulation.h"
 #include <vector>
 #include <fstream>
+#include <limits>
 
 //
 void Simulation::iteration() {
     float temp;
     if (regulator.empty() or regulator[0] == nullptr) throw NoRegulatorPresent();
     try {
-          temp= (regulator[0])->control(dt);
+          temp= (regulator[0])->control(dt_);
     }
     catch (NoRegulatorPresent& noRegulatorPresent) {
         std::cout<<noRegulatorPresent.what()<<std::endl;
@@ -22,7 +23,7 @@ void Simulation::iteration() {
     save2file("results.csv");
 
     tempLog.push_back(temp);
-    currentTime+=dt;
+    currentTime+=dt_;
     std::cout<<temp<<std::endl;
 }
 
@@ -54,9 +55,10 @@ void Simulation::setRegulator(bool isBB) {
     }
 }
 Simulation::Simulation(float dtime,float heaterMaxPower,float height,float width,float deep,float setTemp,bool isBB)
-        : dt(dtime), room(height,width,deep),heater(heaterMaxPower),setTemp_(setTemp){
+        : dt_(dtime), room(height, width, deep), heater(heaterMaxPower), setTemp_(setTemp){
     setRegulator(isBB);
     std::ofstream ofs;
     ofs.open("results.csv", std::ofstream::out | std::ofstream::trunc);
     ofs.close();
 }
+
